@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 export const login = async (email, password) => {
     try {
@@ -10,7 +11,8 @@ export const login = async (email, password) => {
                 'Content-Type': 'application/json'
             }
         });
-        console.log(response.data);
+        // console.log(response.data);
+        // return <Navigate to="/admin-dashboard" />
         return response.data;
     } catch (error) {
         console.log(error.response.data.message);
@@ -18,3 +20,6 @@ export const login = async (email, password) => {
         // throw new Error('Invalid Credentials');
     }
 };
+
+
+

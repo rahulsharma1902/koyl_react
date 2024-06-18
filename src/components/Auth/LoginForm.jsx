@@ -2,12 +2,15 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import { login } from '../../api/auth';
 import koylLogo from '../../images/koyl_logs.png'
+import { useNavigate } from 'react-router-dom';
+
 
 const LoginForm = () => {
     const { login: loginUser } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate(); 
 
     const handleSubmit = async (e) => { 
         e.preventDefault(); 
@@ -15,6 +18,15 @@ const LoginForm = () => {
             const userData = await login(email, password);
             loginUser(userData);
             setError('');
+            console.warn(userData.user_type);
+            if(userData.user_type == 'admin'){
+                console.log(userData);
+                navigate('/admin-dashboard');
+            }else if(userData.user_type == 'doctor'){
+
+            }else{
+
+            }
         } catch (err) {
             setError(err.message);
         }
