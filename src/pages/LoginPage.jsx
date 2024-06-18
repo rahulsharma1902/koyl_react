@@ -4,7 +4,13 @@ import LoginForm from '../components/Auth/LoginForm';
 const LoginPage = () => {
     return (
         <div>
-            <LoginForm />
+            <div className='Login_page'>
+                <div className='login_wrapper'>
+                    <div className='inner_wrapper'>
+                    <LoginForm />
+                    </div>
+                </div>
+            </div>  
         </div>
     );
 };

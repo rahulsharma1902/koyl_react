@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import { login } from '../../api/auth';
+import koylLogo from '../../images/koyl_logs.png'
 
 const LoginForm = () => {
     const { login: loginUser } = useContext(AuthContext);
@@ -21,28 +22,42 @@ const LoginForm = () => {
     
     return (
         <div>
-            <h2>Login</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        
-                    />
+            <div className='form_wrapper'>
+                <div className='form_header'>
+                    <img src={koylLogo} className='Form_logo' alt="Logo" />
+                    <h2>Log in to your account</h2>
+                    <p>Welcome back! Please enter your details.</p>
                 </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <button type="submit">Login</button>
-            </form>
+                
+                {error && <p style={{ color: 'red' }}>{error}</p>}
+                <form onSubmit={handleSubmit}>
+                    <div className='form_inner'>
+                        <div className='form_group'>
+                            <label>Email:</label>
+                            <input
+                                className='form_control'
+                                type="email"
+                                placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                        <div className='form_group'>
+                            <label>Password:</label>
+                            <input
+                                className='form_control'
+                                type="password"
+                                placeholder='Password'
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
+                        <div className='form_button_group'>
+                            <button type="submit" class="cta cta_sky">Sign In</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };
