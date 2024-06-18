@@ -1,0 +1,168 @@
+@import url('../fonts.css');
+*,:before,:after {
+  box-sizing: border-box;
+}
+body{
+  font-family: 'Helvetica Neue';
+  font-size: 16px;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Bigola Display';
+  font-weight: 400;
+}
+.cta {
+  background-color: #38B6FF;
+  border: 1px solid;
+  border-color: #38B6FF;
+  display: inline-block;
+  text-align: center;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s linear;
+}
+.cta:hover {
+  background-color: #ffff;
+  border-color: #ffffff;
+  color: #38B6FF;
+}
+.form_control {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  color: #6C757D;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: none;
+  border-width: 0px;
+}
+.form_button_group .cta {
+  width: 100%;
+  border-radius: 4px;
+  height: 38px;
+  font-weight: 600;
+}
+.Login_page {
+  background-color: #13538A;
+}
+.login_wrapper {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login_wrapper .inner_wrapper {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+.form_header h2 {
+  margin: 0px 0px 10px;
+}
+.form_wrapper {
+  color: #ffffff;
+  text-align: center;
+}
+.form_header .Form_logo {
+  display: block;
+  margin: 0px auto 20px;
+}
+
+.form_group {
+  display: block;
+  margin: 0px 0px 20px;
+}
+.form_wrapper label {
+  display: block;
+  margin: 0px 0px 10px;
+  text-align: left;
+}
+.form_inner {
+  padding: 20px 0px;
+}
+
+/*---- dashboard css start ------*/
+/* src/Home.css */
+.Dashboard_wrap {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background-color: #1b3b5f;
+  color: white;
+  width: 200px;
+  padding: 20px;
+}
+
+.logo {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.main-content {
+  flex-grow: 1;
+  background-color: #e3f2fc;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 18px;
+}
+
+.profile-icon {
+  margin-left: 10px;
+}
+
+.search-section {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.recommendations-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.recommendations-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.recommendations-table th, .recommendations-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.remove {
+  color: red;
+}
+
+
