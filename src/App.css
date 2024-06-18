@@ -86,3 +86,83 @@ h1,h2,h3,h4,h5,h6{
   padding: 20px 0px;
 }
 
+/*---- dashboard css start ------*/
+/* src/Home.css */
+.Dashboard_wrap {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background-color: #1b3b5f;
+  color: white;
+  width: 200px;
+  padding: 20px;
+}
+
+.logo {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.main-content {
+  flex-grow: 1;
+  background-color: #e3f2fc;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 18px;
+}
+
+.profile-icon {
+  margin-left: 10px;
+}
+
+.search-section {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.recommendations-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.recommendations-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.recommendations-table th, .recommendations-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.remove {
+  color: red;
+}
+
+
