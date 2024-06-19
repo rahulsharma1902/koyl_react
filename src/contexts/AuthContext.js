@@ -1,4 +1,5 @@
 import React , {createContext, useState } from 'react';
+import axios from 'axios';
 
 export const AuthContext = createContext();
 
@@ -18,10 +19,28 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         setUser(null);
         localStorage.removeItem('user');
+        localStorage.removeItem('token');
     };
+
+
+    const registerPatient = async (patientData) => {
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/api/register-patient', patientData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const userData = response.data;
+            login(userData);
+        } catch (error) {
+            console.log(error);
+            throw new Error(error.response?.data?.message || 'Registration failed');
+        }
+    }
+
     
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, login, logout ,registerPatient }}>
             {children}
         </AuthContext.Provider>
     );
