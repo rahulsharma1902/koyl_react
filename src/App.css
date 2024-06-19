@@ -109,22 +109,11 @@ h1,h2,h3,h4,h5,h6{
   list-style-type: none;
   padding: 0;
 }
-
 .sidebar ul li {
   margin: 10px 0;
   cursor: pointer;
 }
-
-.main-content {
-  flex-grow: 1;
-  background-color: #e3f2fc;
-  padding: 20px;
-}
-
 .header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
   padding: 10px 0;
   font-size: 18px;
 }
