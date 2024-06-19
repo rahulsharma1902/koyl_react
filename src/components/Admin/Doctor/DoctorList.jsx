@@ -48,6 +48,14 @@ const AdminDoctors = () => {
                                     <a href="#view" className='blue'>View</a> | <a href="#share" className='green'>Share</a> | <a href="#remove" className="remove">Remove</a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td headers="Disease">Irritable Bowel Syndrome (IBS)</td>
+                                    <td headers="Symptoms">Diarrhea</td>
+                                    <td headers="Recommendations">Whole grains, root vegetables...</td>
+                                    <td headers="Actions">
+                                    <a href="#view" className='blue'>View</a> | <a href="#share" className='green'>Share</a> | <a href="#remove" className="remove">Remove</a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
