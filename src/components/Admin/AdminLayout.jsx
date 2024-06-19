@@ -6,13 +6,13 @@ const AdminLayout = ({ user, children }) => {
 
 
     return (
-        <div className="admin-layout">
+        <div className="admin-layout dashboard_layout">
             <AdminHeader user={user} />
-                <div className="admin-main">
+                <div className="admin-main dashboard_inner">
                     <AdminSidebar />
-                        <div className="content">
-                            {children}
-                        </div>
+                    <div className="content dashboard_content">
+                        {children}
+                    </div>
                 </div>
         </div>
     )

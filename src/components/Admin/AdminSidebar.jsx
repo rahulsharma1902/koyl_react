@@ -9,14 +9,16 @@ const AdminSidebar = () =>{
     ];
 
     return (
-        <div className="">
-            <ul>
-                {links.map((link,index) =>(
-                    <li key={index}>
-                        <Link to={link.path} >{link.name}</Link>
-                    </li>
-                ))}
-            </ul>
+        <div className="sidebar">
+           <div className="sidebar_inner">
+            <ul className="sidebar_navigation">
+                    {links.map((link,index) =>(
+                        <li key={index}>
+                            <Link to={link.path} className="navigation_link">{link.name}</Link>
+                        </li>
+                    ))}
+                </ul>
+           </div>
         </div>
     )
 };
