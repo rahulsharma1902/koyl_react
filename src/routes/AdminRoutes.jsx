@@ -9,7 +9,7 @@ const AdminRoutes = () => {
     return (
         <Routes>
             <Route 
-                path="/admin-dashboard" 
+                path="/" 
                 element={
                     <PrivateRoute roles={['admin']}>
                         <AdminDashboard />
@@ -17,7 +17,7 @@ const AdminRoutes = () => {
                 } 
             />
             <Route 
-                path="/admin-dashboard/doctors" 
+                path="/doctors" 
                 element={
                     <PrivateRoute roles={['admin']}>
                         <AdminDoctors />
@@ -25,7 +25,7 @@ const AdminRoutes = () => {
                 } 
             />
             <Route 
-                path="/admin-dashboard/account" 
+                path="/account" 
                 element={
                     <PrivateRoute roles={['admin']}>
                         <AccountDetail />

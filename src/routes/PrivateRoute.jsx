@@ -12,6 +12,10 @@ const PrivateRoute = ({ children, roles }) => {
     if (roles && !roles.includes(user.user_type)) {
         return <Navigate to="/login" />;
     }
+    if (user.user_type === 'patient' && user.status === 1) {
+        return <Navigate to="/complete-profile" />;
+    }
+
 
     return children;
 };

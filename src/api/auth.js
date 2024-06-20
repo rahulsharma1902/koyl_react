@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const login = async (email, password) => {
     try {
@@ -31,7 +33,7 @@ export const login = async (email, password) => {
 
         // return response.data;
     } catch (error) {
-        console.log(error);
+        toast.warning(error.response.data.error);
         throw new Error(error.response.data.message);
         // throw new Error('Invalid Credentials');
     }

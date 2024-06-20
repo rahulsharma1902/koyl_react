@@ -1,9 +1,27 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext , useEffect } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import { login } from '../../api/auth';
 import koylLogo from '../../images/koyl_logs.png';
+import { getDoctors } from '../../api/doctors';
 
 const PatientRegisterForm = () => {
+    const [doctors, setDoctors] = useState([]);
+    const [location, setLocations] = useState([]);
+
+    useEffect(() => {
+        const fetchDoctors = async () => {
+            try {
+                const doctorsList = await getDoctors();
+                console.log(doctorsList);
+                setDoctors(doctorsList);
+            } catch (error) {
+                console.error('Failed to fetch doctors:', error.message);
+            }
+        };
+
+        fetchDoctors();
+    }, []);
+
     const { registerPatient } = useContext(AuthContext);
 
     const [formData, setFormData] = useState({
@@ -78,24 +96,31 @@ const PatientRegisterForm = () => {
                                 placeholder="Enter your Location"
                                 value={formData.location}
                                 onChange={handleChange}
-                                required
+                                
                             />
+                            <ul>
+                                {doctors.map(element => (
+                                        <li key={element.id} value={element.id}>{element.doctor_meta.location}</li>
+                                ))}
+                            </ul>
                             {validationErrors.location && <span className="invalid-feedback">{validationErrors.location}</span>}
                         </div>
                         <div className='form_group'>
                             <label>Your Doctor</label>
                             <select
-                                className={`form_control ${validationErrors.doctorId && 'is-invalid'}`}
+                                className={`form_control ${validationErrors.doctor_id && 'is-invalid'}`}
                                 name="doctor_id"
                                 value={formData.doctor_id}
                                 onChange={handleChange}
                             >
                                 <option value="">Select Doctor</option>
-                                <option value="1">John Doe</option>
-                                <option value="2">Dr John</option>
+                                {doctors.map(element => (
+                                    <option key={element.id} value={element.id}>{element.first_name}</option>
+                                ))}
                             </select>
-                            {validationErrors.doctorId && <span className="invalid-feedback">{validationErrors.doctorId}</span>}
+                            {validationErrors.doctor_id && <span className="invalid-feedback">{validationErrors.doctor_id}</span>}
                         </div>
+
                         <div className='form_group'>
                             <label>Email</label>
                             <input

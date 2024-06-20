@@ -4,6 +4,8 @@ import { login } from '../../api/auth';
 import koylLogo from '../../images/koyl_logs.png'
 import { useNavigate } from 'react-router-dom';
 
+
+
 const LoginForm = () => {
     const { login: loginUser } = useContext(AuthContext);
     const [email, setEmail] = useState('');
@@ -43,8 +45,10 @@ const LoginForm = () => {
                 console.log(userData);
                 navigate('/admin-dashboard');
             } else if (userData.user_type === 'doctor') {
+                navigate('/doctor-dashboard');
                 // Navigate to doctor dashboard
             } else {
+                navigate('/patient-dashboard');
                 // Navigate to other user type dashboard
             }
         } catch (err) {
