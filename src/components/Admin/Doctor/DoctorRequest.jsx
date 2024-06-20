@@ -3,24 +3,23 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import AdminLayout from '../AdminLayout';
 import searchIcon from '../../../images/search_icon.png';
 
-const AdminDoctors = () => {
+const DoctorRequest = () => {
     const { user } = useContext(AuthContext);
     const [searchQuery, setSearchQuery] = useState('');
 
-    const doctors = [
+    const requests = [
         { firstName: 'John', lastName: 'Doe', email: 'email@gmailo.com' },
-        { firstName: 'Jethro', lastName: 'Tull', email: 'Jethro@gmailo.com' },
-        { firstName: 'Jessie', lastName: 'Almnzar', email: 'Jessie@gmailo.com' }
+        { firstName: 'Jethro', lastName: 'Tull', email: 'Jethro@gmailo.com' }
     ];
 
     const handleSearch = (event) => {
         setSearchQuery(event.target.value);
     };
 
-    const filteredDoctors = doctors.filter(doctor => 
-        doctor.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        doctor.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        doctor.email.toLowerCase().includes(searchQuery.toLowerCase())
+    const filteredRequests = requests.filter(request => 
+        request.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        request.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        request.email.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (
@@ -29,7 +28,7 @@ const AdminDoctors = () => {
                 <div className="dashboard_module recommendations-module">
                     <div className='dash_container'>
                         <div className='module_header'>
-                            <h2>Doctors</h2>
+                            <h2>Doctor's requests</h2>
                         </div>
                         <div className='filter_block'>
                             <div className='search_block'>
@@ -57,13 +56,15 @@ const AdminDoctors = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {filteredDoctors.map((doctor, index) => (
+                                    {filteredRequests.map((request, index) => (
                                         <tr key={index}>
-                                            <td headers="First Name">{doctor.firstName}</td>
-                                            <td headers="Last Name">{doctor.lastName}</td>
-                                            <td headers="Email Address">{doctor.email}</td>
+                                            <td headers="First Name">{request.firstName}</td>
+                                            <td headers="Last Name">{request.lastName}</td>
+                                            <td headers="Email Address">{request.email}</td>
                                             <td headers="Actions">
-                                                <a href="#view" className='blue'>View</a> | <a href="#remove" className="remove">delete</a>
+                                                <a href="#view" className='blue'>View</a> | 
+                                                <a href="#approve" className='green'>Approve</a> | 
+                                                <a href="#remove" className="remove">Remove</a>
                                             </td>
                                         </tr>
                                     ))}
@@ -77,4 +78,4 @@ const AdminDoctors = () => {
     );
 };
 
-export default AdminDoctors;
+export default DoctorRequest;
