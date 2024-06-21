@@ -1,18 +1,19 @@
-import React, { useState, useContext , useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
-import { login } from '../../api/auth';
 import koylLogo from '../../images/koyl_logs.png';
 import { getDoctors } from '../../api/doctors';
 
 const PatientRegisterForm = () => {
     const [doctors, setDoctors] = useState([]);
-    const [location, setLocations] = useState([]);
+    const [filteredLocations, setFilteredLocations] = useState([]);
+    const [selectedDoctor, setSelectedDoctor] = useState(null);
+
+    const { registerPatient } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchDoctors = async () => {
             try {
                 const doctorsList = await getDoctors();
-                console.log(doctorsList);
                 setDoctors(doctorsList);
             } catch (error) {
                 console.error('Failed to fetch doctors:', error.message);
@@ -21,8 +22,6 @@ const PatientRegisterForm = () => {
 
         fetchDoctors();
     }, []);
-
-    const { registerPatient } = useContext(AuthContext);
 
     const [formData, setFormData] = useState({
         email: '',
@@ -38,13 +37,37 @@ const PatientRegisterForm = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-        // Clear validation error if user starts typing again
         setValidationErrors({ ...validationErrors, [name]: '' });
+
+        if (name === 'location') {
+            // Clear selected doctor if location is modified
+            setFormData({ ...formData, location: value, doctor_id: '' });
+            setSelectedDoctor(null);
+            filterLocations(value);
+        }
+    };
+
+    const filterLocations = (query) => {
+        const filtered = doctors.filter(doctor =>
+            doctor.doctor_meta.location.toLowerCase().includes(query.toLowerCase())
+        ).map(doctor => doctor.doctor_meta.location);
+
+        setFilteredLocations(filtered);
+    };
+
+    const handleLocationSelect = (location) => {
+        const selectedDoctor = doctors.find(doctor => doctor.doctor_meta.location === location);
+        setFormData({
+            ...formData,
+            location,
+            doctor_id: selectedDoctor ? selectedDoctor.id : ''
+        });
+        setSelectedDoctor(selectedDoctor);
+        setFilteredLocations([]);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Basic form validation
         const errors = {};
         if (!formData.email.trim()) {
             errors.email = 'Email is required';
@@ -57,6 +80,14 @@ const PatientRegisterForm = () => {
         }
         if (!formData.location.trim()) {
             errors.location = 'Location is required';
+        } else {
+            // Check if location is valid
+            const validLocation = doctors.some(doctor => doctor.doctor_meta.location === formData.location);
+            if (!validLocation) {
+                errors.location = 'Location is not valid';
+                setFormData({ ...formData, doctor_id: '' });
+                setSelectedDoctor(null);
+            }
         }
         if (!formData.doctor_id) {
             errors.doctor_id = 'Please select a doctor';
@@ -70,7 +101,6 @@ const PatientRegisterForm = () => {
         try {
             await registerPatient(formData);
             setError('');
-            // history.push('/login');
         } catch (err) {
             setError(err.message);
         }
@@ -96,13 +126,16 @@ const PatientRegisterForm = () => {
                                 placeholder="Enter your Location"
                                 value={formData.location}
                                 onChange={handleChange}
-                                
                             />
-                            <ul>
-                                {doctors.map(element => (
-                                        <li key={element.id} value={element.id}>{element.doctor_meta.location}</li>
-                                ))}
-                            </ul>
+                            {filteredLocations.length > 0 && (
+                                <ul className="location_list">
+                                    {filteredLocations.map((location, index) => (
+                                        <li key={index} onClick={() => handleLocationSelect(location)}>
+                                            {location}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                             {validationErrors.location && <span className="invalid-feedback">{validationErrors.location}</span>}
                         </div>
                         <div className='form_group'>
@@ -112,11 +145,12 @@ const PatientRegisterForm = () => {
                                 name="doctor_id"
                                 value={formData.doctor_id}
                                 onChange={handleChange}
+                                disabled
                             >
                                 <option value="">Select Doctor</option>
-                                {doctors.map(element => (
-                                    <option key={element.id} value={element.id}>{element.first_name}</option>
-                                ))}
+                                {selectedDoctor && (
+                                    <option value={selectedDoctor.id}>{selectedDoctor.first_name}</option>
+                                )}
                             </select>
                             {validationErrors.doctor_id && <span className="invalid-feedback">{validationErrors.doctor_id}</span>}
                         </div>
