@@ -149,7 +149,7 @@ const PatientRegisterForm = () => {
                             >
                                 <option value="">Select Doctor</option>
                                 {selectedDoctor && (
-                                    <option value={selectedDoctor.id}>{selectedDoctor.first_name}</option>
+                                    <option value={selectedDoctor.id}>Dr.{selectedDoctor.first_name}</option>
                                 )}
                             </select>
                             {validationErrors.doctor_id && <span className="invalid-feedback">{validationErrors.doctor_id}</span>}
