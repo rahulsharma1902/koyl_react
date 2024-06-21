@@ -142,20 +142,6 @@ const DoctorRegisterForm = () => {
                                     onChange={handleChange}
                                 />
                                 {validationErrors.practice && <span className="invalid-feedback">{validationErrors.practice}</span>}
-                            </div>
-                        </div>
-                        <div className='form_col W_50'>
-                            <div className='form_group'>
-                                <label>Practice/Office you may work at</label>
-                                <input
-                                    type="text"
-                                    className={`form_control ${validationErrors.practice && 'is-invalid'}`}
-                                    name="practice"
-                                    placeholder="Enter your practice office"
-                                    value={formData.practice}
-                                    onChange={handleChange}
-                                />
-                                {validationErrors.practice && <span className="invalid-feedback">{validationErrors.practice}</span>}
                             </div> 
                         </div>
                         <div className='form_col W_50'>
@@ -172,7 +158,7 @@ const DoctorRegisterForm = () => {
                                 {validationErrors.doctor_type && <span className="invalid-feedback">{validationErrors.doctor_type}</span>}
                             </div> 
                         </div>
-                        <div className='form_col W_100'>
+                        <div className='form_col W_50'>
                             <div className='form_group'>
                                 <label>Email</label>
                                 <input
