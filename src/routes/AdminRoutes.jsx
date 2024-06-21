@@ -25,7 +25,7 @@ const AdminRoutes = () => {
                 } 
             />
              <Route 
-                path="/admin-dashboard/doctors-request" 
+                path="/doctors-request" 
                 element={
                     <PrivateRoute roles={['admin']}>
                         <DoctorRequest />
