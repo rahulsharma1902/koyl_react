@@ -34,7 +34,7 @@ a {
 .form_control {
   display: block;
   width: 100%;
-  padding: 10px 20px;
+  padding: 14px 20px;
   color: #6C757D;
   font-size: 16px;
   font-weight: 400;
@@ -46,7 +46,7 @@ a {
 .form_button_group .cta {
   width: 100%;
   border-radius: 4px;
-  height: 38px;
+  height: 46px;
   font-weight: 600;
 }
 .Login_page {
@@ -61,7 +61,7 @@ a {
 }
 .login_wrapper .inner_wrapper {
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   padding: 20px;
 }
 .form_header h2 {
@@ -84,6 +84,7 @@ a {
   display: block;
   margin: 0px 0px 10px;
   text-align: left;
+  font-size: 15px;
 }
 .form_inner {
   padding: 20px 0px;
@@ -310,6 +311,9 @@ a.remove {
 .form_col.W_50 {
   width: 50%;
 }
+.form_col.W_100 {
+  width: 100%;
+}
 .account-form .form_control {
   border: 1px solid #6c757d4a;
 }
@@ -349,6 +353,29 @@ td[headers="Actions"] a {
 .filter_block {
   margin: 0px 0px 20px;
 }
+.invalid-feedback,.error_message {
+  display: inline-block;
+  text-align: left;
+  width: 100%;
+  margin: 8px 0px;
+  color: #ec2121;
+}
 /*---- sumenu style ------*/
 
+/*------ responsive start------*/
+
+@media (max-Width: 767px) {
+  .form_col.W_50 {
+    width: 100%;
+}
+h2,h1 {
+  font-size: 32px;
+}
+body {
+  font-size: 14px;
+}
+.form_control {
+  font-size: 14px;
+}
+}
 
