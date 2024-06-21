@@ -3,6 +3,7 @@ import './css/style.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import LoginPage from './pages/LoginPage';
+import Logout from '../src/components/Auth/Logout';
 import AdminRoutes from './routes/AdminRoutes';
 import DoctorRoutes from './routes/DoctorRoutes';
 import RegisterPage from './pages/RegisterPage';
@@ -15,6 +16,8 @@ const App = () => {
             <Router>
                 <Routes>
                     <Route path="/login" element={<LoginPage />} />
+                    <Route path="/logout" component={Logout} />
+
                     <Route path="/admin-dashboard/*" element={<AdminRoutes />} />
                     <Route path="/doctor-dashboard/*" element={<DoctorRoutes />} />
                     <Route path="/patient-dashboard/*" element={<PatientRoutes />} />

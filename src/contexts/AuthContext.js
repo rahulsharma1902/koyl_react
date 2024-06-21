@@ -19,7 +19,14 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('user', JSON.stringify(userData));
     };
 
-    const logout = () => {
+    const logout = async () => {
+        // try {
+        //     // If you have an API call to logout, make it here
+        //     await axios.post('http://127.0.0.1:8000/api/logout');
+        // } catch (error) {
+        //     console.error('Logout API call failed:', error);
+        // }
+
         setUser(null);
         localStorage.removeItem('user');
         localStorage.removeItem('token');
@@ -34,6 +41,7 @@ export const AuthProvider = ({ children }) => {
                 }
             });
             const userData = response.data;
+            toast.success(response.data.message);
             login(userData);
         } catch (error) {
             console.log(error);
@@ -52,7 +60,7 @@ export const AuthProvider = ({ children }) => {
             });
             const userData = response.data;
             // login(userData);
-            console.log(response);
+            console.log('Response'+response);
             toast.success(response.data.message);
 
             console.log(response.data.message);
