@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import './css/style.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import LoginPage from './pages/LoginPage';
+import AdminRoutes from './routes/AdminRoutes';
+import DoctorRoutes from './routes/DoctorRoutes';
+import RegisterPage from './pages/RegisterPage';
+import DoctorRegisterPage from './pages/DoctorRegisterPage';
+import PatientRoutes from './routes/PatientRoute';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    return (
+        <AuthProvider>
+            <Router>
+                <Routes>
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/admin-dashboard/*" element={<AdminRoutes />} />
+                    <Route path="/doctor-dashboard/*" element={<DoctorRoutes />} />
+                    <Route path="/patient-dashboard/*" element={<PatientRoutes />} />
+                    <Route path="/Register" element={<RegisterPage />} />
+                    <Route path="/doctor-register" element={<DoctorRegisterPage />} />
+                </Routes>
+            </Router>
+        </AuthProvider>
+    );
+};
 
 export default App;
