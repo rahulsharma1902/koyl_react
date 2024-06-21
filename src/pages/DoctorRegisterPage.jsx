@@ -1,5 +1,6 @@
 import React from "react";
-import RegisterForm from "../components/Auth/RegisterForm";
+import DoctorRegisterForm from "../components/Auth/DoctorRegister";
+
 
 const RegisterPage = () => {
     return(
@@ -7,7 +8,7 @@ const RegisterPage = () => {
             <div className='Login_page'>
                 <div className='login_wrapper'>
                     <div className='inner_wrapper'>
-                        <RegisterForm/>
+                        <DoctorRegisterForm/>
                     </div>
                 </div>
             </div> 
