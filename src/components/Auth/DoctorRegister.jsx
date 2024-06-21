@@ -87,105 +87,139 @@ const DoctorRegisterForm = () => {
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div className='form_inner'>
-                    <div className='form_group'>
-                        <label>First Name</label>
-                        <input
-                            type="text"
-                            className={`form_control ${validationErrors.first_name && 'is-invalid'}`}
-                            name="first_name"
-                            placeholder="Enter your first name"
-                            value={formData.first_name}
-                            onChange={handleChange}
-                        />
-                        {validationErrors.first_name && <span className="invalid-feedback">{validationErrors.first_name}</span>}
-                    </div>
-                    <div className='form_group'>
-                        <label>Last Name</label>
-                        <input
-                            type="text"
-                            className={`form_control ${validationErrors.last_name && 'is-invalid'}`}
-                            name="last_name"
-                            placeholder="Enter your last name"
-                            value={formData.last_name}
-                            onChange={handleChange}
-                        />
-                        {validationErrors.last_name && <span className="invalid-feedback">{validationErrors.last_name}</span>}
-                    </div>
-                    <div className='form_group'>
-                        <label>Location</label>
-                        <input
-                            type="text"
-                            className={`form_control ${validationErrors.location && 'is-invalid'}`}
-                            name="location"
-                            placeholder="Enter your location"
-                            value={formData.location}
-                            onChange={handleChange}
-                        />
-                        {validationErrors.location && <span className="invalid-feedback">{validationErrors.location}</span>}
-                    </div>
-                    <div className='form_group'>
-                        <label>Practice/Office you may work at</label>
-                        <input
-                            type="text"
-                            className={`form_control ${validationErrors.practice && 'is-invalid'}`}
-                            name="practice"
-                            placeholder="Enter your practice office"
-                            value={formData.practice}
-                            onChange={handleChange}
-                        />
-                        {validationErrors.practice && <span className="invalid-feedback">{validationErrors.practice}</span>}
-                    </div>
-                    <div className='form_group'>
-                        <label>Type of Doctor or Practice</label>
-                        <input
-                            type="text"
-                            className={`form_control ${validationErrors.doctor_type && 'is-invalid'}`}
-                            name="doctor_type"
-                            placeholder="Enter your type"
-                            value={formData.doctor_type}
-                            onChange={handleChange}
-                        />
-                        {validationErrors.doctor_type && <span className="invalid-feedback">{validationErrors.doctor_type}</span>}
-                    </div>
-                    <div className='form_group'>
-                        <label>Email</label>
-                        <input
-                            className={`form_control ${validationErrors.email && 'is-invalid'}`}
-                            type="email"
-                            placeholder="Enter your email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                        />
-                        {validationErrors.email && <span className="invalid-feedback">{validationErrors.email}</span>}
-                    </div>
-                    <div className='form_group'>
-                        <label>Password</label>
-                        <input
-                            className={`form_control ${validationErrors.password && 'is-invalid'}`}
-                            type="password"
-                            placeholder='Enter your password'
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                        />
-                        {validationErrors.password && <span className="invalid-feedback">{validationErrors.password}</span>}
-                    </div>
-                    <div className='form_group'>
-                        <label>Re-enter Password</label>
-                        <input
-                            className={`form_control ${validationErrors.confirmPassword && 'is-invalid'}`}
-                            type="password"
-                            placeholder='Re-enter your password'
-                            name="confirmPassword"
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                        />
-                        {validationErrors.confirmPassword && <span className="invalid-feedback">{validationErrors.confirmPassword}</span>}
-                    </div>
-                    <div className='form_button_group'>
-                        <button type="submit" className="cta cta_sky">Sign Up</button>
-                    </div>
+                    <div className='form_row'>
+                        <div className='form_col W_50'>
+                            <div className='form_group'>
+                                <label>First Name</label>
+                                <input
+                                    type="text"
+                                    className={`form_control ${validationErrors.first_name && 'is-invalid'}`}
+                                    name="first_name"
+                                    placeholder="Enter your first name"
+                                    value={formData.first_name}
+                                    onChange={handleChange}
+                                />
+                                {validationErrors.first_name && <span className="invalid-feedback">{validationErrors.first_name}</span>}
+                            </div>
+                        </div>
+                        <div className='form_col W_50'>
+                            <div className='form_group'>
+                                <label>Last Name</label>
+                                <input
+                                    type="text"
+                                    className={`form_control ${validationErrors.last_name && 'is-invalid'}`}
+                                    name="last_name"
+                                    placeholder="Enter your last name"
+                                    value={formData.last_name}
+                                    onChange={handleChange}
+                                />
+                                {validationErrors.last_name && <span className="invalid-feedback">{validationErrors.last_name}</span>}
+                            </div>
+                        </div>
+                        <div className='form_col W_50'>
+                            <div className='form_group'>
+                                <label>Location</label>
+                                <input
+                                    type="text"
+                                    className={`form_control ${validationErrors.location && 'is-invalid'}`}
+                                    name="location"
+                                    placeholder="Enter your location"
+                                    value={formData.location}
+                                    onChange={handleChange}
+                                />
+                                {validationErrors.location && <span className="invalid-feedback">{validationErrors.location}</span>}
+                            </div> 
+                        </div>
+                        <div className='form_col W_50'>
+                            <div className='form_group'>
+                                <label>Practice/Office you may work at</label>
+                                <input
+                                    type="text"
+                                    className={`form_control ${validationErrors.practice && 'is-invalid'}`}
+                                    name="practice"
+                                    placeholder="Enter your practice office"
+                                    value={formData.practice}
+                                    onChange={handleChange}
+                                />
+                                {validationErrors.practice && <span className="invalid-feedback">{validationErrors.practice}</span>}
+                            </div>
+                        </div>
+                        <div className='form_col W_50'>
+                            <div className='form_group'>
+                                <label>Practice/Office you may work at</label>
+                                <input
+                                    type="text"
+                                    className={`form_control ${validationErrors.practice && 'is-invalid'}`}
+                                    name="practice"
+                                    placeholder="Enter your practice office"
+                                    value={formData.practice}
+                                    onChange={handleChange}
+                                />
+                                {validationErrors.practice && <span className="invalid-feedback">{validationErrors.practice}</span>}
+                            </div> 
+                        </div>
+                        <div className='form_col W_50'>
+                            <div className='form_group'>
+                                <label>Type of Doctor or Practice</label>
+                                <input
+                                    type="text"
+                                    className={`form_control ${validationErrors.doctor_type && 'is-invalid'}`}
+                                    name="doctor_type"
+                                    placeholder="Enter your type"
+                                    value={formData.doctor_type}
+                                    onChange={handleChange}
+                                />
+                                {validationErrors.doctor_type && <span className="invalid-feedback">{validationErrors.doctor_type}</span>}
+                            </div> 
+                        </div>
+                        <div className='form_col W_100'>
+                            <div className='form_group'>
+                                <label>Email</label>
+                                <input
+                                    className={`form_control ${validationErrors.email && 'is-invalid'}`}
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                />
+                                {validationErrors.email && <span className="invalid-feedback">{validationErrors.email}</span>}
+                            </div>
+                        </div>
+                        <div className='form_col W_100'>
+                            <div className='form_group'>
+                                <label>Password</label>
+                                <input
+                                    className={`form_control ${validationErrors.password && 'is-invalid'}`}
+                                    type="password"
+                                    placeholder='Enter your password'
+                                    name="password"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                />
+                                {validationErrors.password && <span className="invalid-feedback">{validationErrors.password}</span>}
+                            </div>
+                        </div>
+                        <div className='form_col W_100'>
+                            <div className='form_group'>
+                                <label>Re-enter Password</label>
+                                <input
+                                    className={`form_control ${validationErrors.confirmPassword && 'is-invalid'}`}
+                                    type="password"
+                                    placeholder='Re-enter your password'
+                                    name="confirmPassword"
+                                    value={formData.confirmPassword}
+                                    onChange={handleChange}
+                                />
+                                {validationErrors.confirmPassword && <span className="invalid-feedback">{validationErrors.confirmPassword}</span>}
+                            </div>
+                        </div>
+                        <div className='form_col W_100'>
+                            <div className='form_button_group'>
+                                <button type="submit" className="cta cta_sky">Sign Up</button>
+                            </div>
+                        </div>
+                    </div>   
                 </div>
             </form>
         </div>
