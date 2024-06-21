@@ -9,7 +9,7 @@ const PatientRegisterForm = () => {
     const [selectedDoctor, setSelectedDoctor] = useState(null);
 
     const { registerPatient } = useContext(AuthContext);
-
+ 
     useEffect(() => {
         const fetchDoctors = async () => {
             try {
