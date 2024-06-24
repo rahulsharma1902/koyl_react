@@ -46,9 +46,30 @@ export const registerPatient = async (patientData) => {
                 'Content-Type': 'application/json'
             }
         });
+        toast.success(response.data.message);
         return response.data;
     } catch (error) {
         throw new Error(error.response?.data?.message || 'Registration failed');
+    }
+};
+export const completeProfile = async (profileData) => {
+    try {
+        // const token = localStorage.getItem('token');
+        // console.warn(token);
+        // const headers = {
+        //     'Authorization': `Bearer ${token}`,
+        // };
+        // const response = await apiClient.post('/complete-profile', profileData, { headers });
+        const response = await axios.post('http://127.0.0.1:8000/api/complete-profile', profileData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        console.log(response);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw new Error(error.response?.data?.message || 'Failed to complete profile');
     }
 };
 

@@ -2,19 +2,20 @@ import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 import AdminLayout from '../AdminLayout';
 import searchIcon from '../../../images/search_icon.png';
-import { getDoctors } from '../../../api/doctors';
+import { getRequestDoctors } from '../../../api/doctors';
+import {approveDoctorRequest} from '../../../api/doctors';
+import { toast } from 'react-toastify'; 
 
-const AdminDoctors = () => {
-    const [doctors, setDoctors] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
-
+const DoctorRequest = () => {
     const { user } = useContext(AuthContext);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [requests, setRequests] = useState([]);
 
     useEffect(() => {
         const fetchDoctors = async () => {
             try {
-                const doctorsList = await getDoctors();
-                setDoctors(doctorsList);
+                const doctorsList = await getRequestDoctors();
+                setRequests(doctorsList);
             } catch (error) {
                 console.error('Failed to fetch doctors:', error.message);
             }
@@ -23,14 +24,29 @@ const AdminDoctors = () => {
         fetchDoctors();
     }, []);
 
+
+    const approveRequest = async (id) => {
+        try {
+            if (id) {
+                const response = await approveDoctorRequest({ id });
+                console.log('Approval response:', response);
+                toast.success('Operation successful!');
+            } else {
+                throw new Error('Invalid id provided for approval');
+            }
+        } catch (error) {
+            console.error('Approval error:', error.message);
+        }
+    };
+    
     const handleSearch = (event) => {
         setSearchQuery(event.target.value);
     };
 
-    const filteredDoctors = doctors.filter(doctor => 
-        doctor.first_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        doctor.last_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        doctor.email?.toLowerCase().includes(searchQuery.toLowerCase())
+    const filteredRequests = requests.filter(request => 
+        request.first_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        request.last_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        request.email?.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (
@@ -39,7 +55,7 @@ const AdminDoctors = () => {
                 <div className="dashboard_module recommendations-module">
                     <div className='dash_container'>
                         <div className='module_header'>
-                            <h2>Doctors</h2>
+                            <h2>Doctor's requests</h2>
                         </div>
                         <div className='filter_block'>
                             <div className='search_block'>
@@ -67,13 +83,15 @@ const AdminDoctors = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {filteredDoctors.map((doctor, index) => (
+                                    {filteredRequests.map((request, index) => (
                                         <tr key={index}>
-                                            <td headers="First Name">{doctor.first_name}</td>
-                                            <td headers="Last Name">{doctor.last_name}</td>
-                                            <td headers="Email Address">{doctor.email}</td>
+                                            <td headers="First Name">{request.first_name}</td>
+                                            <td headers="Last Name">{request.last_name}</td>
+                                            <td headers="Email Address">{request.email}</td>
                                             <td headers="Actions">
-                                                <a href="#view" className='blue'>View</a> | <a href="#remove" className="remove">delete</a>
+                                                <a href="#view" className='blue'>View</a> | 
+                                                <a href="#approve" onClick={() => approveRequest(request.id)} className='green'>Approve</a> | 
+                                                <a href="#remove" onClick={()=>approveRequest()} className="remove">Remove</a>
                                             </td>
                                         </tr>
                                     ))}
@@ -87,4 +105,4 @@ const AdminDoctors = () => {
     );
 };
 
-export default AdminDoctors;
+export default DoctorRequest;
