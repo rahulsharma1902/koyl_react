@@ -13,7 +13,7 @@ const PrivateRoute = ({ children, roles }) => {
         return <Navigate to="/login" />;
     }
     if (user.user_type === 'patient' && user.status === 1) {
-        // return <Navigate to="/patient-dashboard" />;
+        return <Navigate to="/complete-profile" />;
     }
 
 
