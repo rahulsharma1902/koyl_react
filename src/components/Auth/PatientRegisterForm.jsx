@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import koylLogo from '../../images/koyl_logs.png';
 import { getDoctors } from '../../api/doctors';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PatientRegisterForm = () => {
     const [doctors, setDoctors] = useState([]);
@@ -102,12 +104,14 @@ const PatientRegisterForm = () => {
             await registerPatient(formData);
             setError('');
         } catch (err) {
-            setError(err.message);
+            toast.error(err.message);
+            // setError(err.message);
         }
     };
 
     return (
         <div>
+            <ToastContainer />
             <div className='form_wrapper'>
                 <div className='form_header'>
                     <img src={koylLogo} className='Form_logo' alt="Logo" />

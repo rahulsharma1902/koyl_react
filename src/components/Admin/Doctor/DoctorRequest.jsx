@@ -1,25 +1,52 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 import AdminLayout from '../AdminLayout';
 import searchIcon from '../../../images/search_icon.png';
+import { getRequestDoctors } from '../../../api/doctors';
+import {approveDoctorRequest} from '../../../api/doctors';
+import { toast } from 'react-toastify'; 
 
 const DoctorRequest = () => {
     const { user } = useContext(AuthContext);
     const [searchQuery, setSearchQuery] = useState('');
+    const [requests, setRequests] = useState([]);
 
-    const requests = [
-        { firstName: 'John', lastName: 'Doe', email: 'email@gmailo.com' },
-        { firstName: 'Jethro', lastName: 'Tull', email: 'Jethro@gmailo.com' }
-    ];
+    useEffect(() => {
+        const fetchDoctors = async () => {
+            try {
+                const doctorsList = await getRequestDoctors();
+                setRequests(doctorsList);
+            } catch (error) {
+                console.error('Failed to fetch doctors:', error.message);
+            }
+        };
 
+        fetchDoctors();
+    }, []);
+
+
+    const approveRequest = async (id) => {
+        try {
+            if (id) {
+                const response = await approveDoctorRequest({ id });
+                console.log('Approval response:', response);
+                toast.success('Operation successful!');
+            } else {
+                throw new Error('Invalid id provided for approval');
+            }
+        } catch (error) {
+            console.error('Approval error:', error.message);
+        }
+    };
+    
     const handleSearch = (event) => {
         setSearchQuery(event.target.value);
     };
 
     const filteredRequests = requests.filter(request => 
-        request.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        request.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        request.email.toLowerCase().includes(searchQuery.toLowerCase())
+        request.first_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        request.last_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        request.email?.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (
@@ -58,13 +85,13 @@ const DoctorRequest = () => {
                                 <tbody>
                                     {filteredRequests.map((request, index) => (
                                         <tr key={index}>
-                                            <td headers="First Name">{request.firstName}</td>
-                                            <td headers="Last Name">{request.lastName}</td>
+                                            <td headers="First Name">{request.first_name}</td>
+                                            <td headers="Last Name">{request.last_name}</td>
                                             <td headers="Email Address">{request.email}</td>
                                             <td headers="Actions">
                                                 <a href="#view" className='blue'>View</a> | 
-                                                <a href="#approve" className='green'>Approve</a> | 
-                                                <a href="#remove" className="remove">Remove</a>
+                                                <a href="#approve" onClick={() => approveRequest(request.id)} className='green'>Approve</a> | 
+                                                <a href="#remove" onClick={()=>approveRequest()} className="remove">Remove</a>
                                             </td>
                                         </tr>
                                     ))}

@@ -1,26 +1,36 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 import AdminLayout from '../AdminLayout';
 import searchIcon from '../../../images/search_icon.png';
+import { getDoctors } from '../../../api/doctors';
 
 const AdminDoctors = () => {
-    const { user } = useContext(AuthContext);
+    const [doctors, setDoctors] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
 
-    const doctors = [
-        { firstName: 'John', lastName: 'Doe', email: 'email@gmailo.com' },
-        { firstName: 'Jethro', lastName: 'Tull', email: 'Jethro@gmailo.com' },
-        { firstName: 'Jessie', lastName: 'Almnzar', email: 'Jessie@gmailo.com' }
-    ];
+    const { user } = useContext(AuthContext);
+
+    useEffect(() => {
+        const fetchDoctors = async () => {
+            try {
+                const doctorsList = await getDoctors();
+                setDoctors(doctorsList);
+            } catch (error) {
+                console.error('Failed to fetch doctors:', error.message);
+            }
+        };
+
+        fetchDoctors();
+    }, []);
 
     const handleSearch = (event) => {
         setSearchQuery(event.target.value);
     };
 
     const filteredDoctors = doctors.filter(doctor => 
-        doctor.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        doctor.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        doctor.email.toLowerCase().includes(searchQuery.toLowerCase())
+        doctor.first_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        doctor.last_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        doctor.email?.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (
@@ -59,8 +69,8 @@ const AdminDoctors = () => {
                                 <tbody>
                                     {filteredDoctors.map((doctor, index) => (
                                         <tr key={index}>
-                                            <td headers="First Name">{doctor.firstName}</td>
-                                            <td headers="Last Name">{doctor.lastName}</td>
+                                            <td headers="First Name">{doctor.first_name}</td>
+                                            <td headers="Last Name">{doctor.last_name}</td>
                                             <td headers="Email Address">{doctor.email}</td>
                                             <td headers="Actions">
                                                 <a href="#view" className='blue'>View</a> | <a href="#remove" className="remove">delete</a>

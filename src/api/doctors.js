@@ -15,3 +15,32 @@ export const getDoctors = async () => {
         throw new Error(error.response?.data?.message || 'Failed to fetch doctor list.');
     }
 };
+
+export const getRequestDoctors = async () => {
+    try{
+            
+        const response = await axios.get('http://127.0.0.1:8000/api/request-doctors');
+        // toast.success('Successfully fetched doctor list.');
+        return response.data;
+
+    } catch (error){
+
+        // toast.error(error.response?.data?.message || 'Failed to fetch doctor list.');
+        throw new Error(error.response?.data?.message || 'Failed to fetch doctor request.');
+
+    }
+}
+
+
+export const approveDoctorRequest = async (approveUser) => {
+    try {
+        const response = await axios.post('http://127.0.0.1:8000/api/request-approve', approveUser, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response?.data?.message || 'Failed to Approve Doctor');
+    }
+};
