@@ -3,11 +3,19 @@ import { Link } from "react-router-dom";
 import dashbordlogo from '../../images/logo_white.png';
 import useravtar from '../../images/avatar.png';
 
-const AdminHeader = ({ user }) => {
+const AdminHeader = ({ user, onToggleSidebar }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [buttonToggled, setButtonToggled] = useState(false);
+
     const toggleDropdown = () => {
         setDropdownOpen(!dropdownOpen);
     };
+
+    const handleToggleClick = () => {
+        setButtonToggled(!buttonToggled);
+        onToggleSidebar();
+    };
+
     return (
         <div className="dash_board_header">
             <div className="container-full">
@@ -15,6 +23,16 @@ const AdminHeader = ({ user }) => {
                     <div className="logo_col">
                         <div className="Dashbaord_logo">
                             <img src={dashbordlogo} className='Dash_logo' alt="Logo" />
+                        </div>
+                        <div className="toggle_button">
+                            <button 
+                                className={`toggle_button_cta ${buttonToggled ? 'active' : ''}`} 
+                                onClick={handleToggleClick}
+                            >
+                                <span className="bar bar1"></span>
+                                <span className="bar bar2"></span>
+                                <span className="bar bar3"></span>
+                            </button>
                         </div>
                     </div>
                     <div className="admin_info_col">
