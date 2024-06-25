@@ -32,19 +32,23 @@ const AdminHeader = ({ user, onToggleSidebar }) => {
                                 <span className="bar bar1"></span>
                                 <span className="bar bar2"></span>
                                 <span className="bar bar3"></span>
+                                <i class="fa-solid fa-chevron-right"></i>
                             </button>
                         </div>
                     </div>
                     <div className="admin_info_col">
                         <div className="user-info" onClick={toggleDropdown}>
-                            <div className="user_name">
-                                Welcome, {user ? user.first_name : 'Guest'}
+                            <div className="user_name desktop_usename">
+                                <span className="user_greet">Welcome, </span> {user ? user.first_name : 'Guest'}
                             </div>
                             <div className="user_avtar">
                                 <img src={useravtar} alt="avatar" />
                             </div>
                             <div className={`dropdown_menu ${dropdownOpen ? 'open' : ''}`}>
                                 <div className="dropdown_triangle"></div>
+                                <div className="user_name mobile_username">
+                                    <span className="user_greet">Welcome, </span> {user ? user.first_name : 'Guest'}
+                                </div>
                                 <Link to="/my-account" className="dropdown_item">My Account</Link>
                                 <Link to="/logout" className="dropdown_item logout">Log out</Link>
                             </div>

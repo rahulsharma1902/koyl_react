@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import AdminLayout from './AdminLayout';
-
+import SearchSymtom from './SearchSymtom';
 const AdminDashboard = () => {
     const { user } = useContext(AuthContext);
     console.log(user);
@@ -14,11 +14,7 @@ const AdminDashboard = () => {
             </div>
             <div className="dashboard_module search-section">
                 <div className='dash_container'>
-                    <div className='search_wrap'>
-                        <h2>Search Symptoms and Diseases</h2>
-                        <input type="text" placeholder="Search..." className="search-input" />
-                        <p>Press enter or add a comma between each symptom or disease</p>
-                    </div>
+                    <SearchSymtom/>
                 </div>
             </div>
             <div className="dashboard_module recommendations-module">
