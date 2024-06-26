@@ -5,31 +5,31 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export const login = async (email, password) => {
     try {
-        const response = await axios.post('http://127.0.0.1:8000/api/login', {
-            email,
-            password
-        }, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        // const data = {
-        //     id: 1,
-        //     first_name: "John",
-        //     last_name: "Doe",
-        //     email: email,
-        //     // user_type: email === "admin@gmail.com" ? "admin" : "doctor",
-        //     user_type: 'admin',
-        //     token: "static-jwt-token"
-        // };
-        // return data;
+        // const response = await axios.post('http://127.0.0.1:8000/api/login', {
+        //     email,
+        //     password
+        // }, {
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // });
+        const data = {
+            id: 1,
+            first_name: "John",
+            last_name: "Doe",
+            email: email,
+            // user_type: email === "admin@gmail.com" ? "admin" : "doctor",
+            user_type: 'admin',
+            token: "static-jwt-token"
+        };
+        return data;
 
-        console.log(response);
-        localStorage.setItem('token', response.data.token);
+        // console.log(response);
+        // localStorage.setItem('token', response.data.token);
 
-        // Return user data (excluding token)
-        const { token, ...userData } = response.data;
-        return userData;
+        // // Return user data (excluding token)
+        // const { token, ...userData } = response.data;
+        // return userData;
 
         // return response.data;
     } catch (error) {

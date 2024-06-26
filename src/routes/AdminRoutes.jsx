@@ -5,6 +5,8 @@ import AdminDashboard from '../components/Admin/AdminDashboard';
 import AdminDoctors from '../components/Admin/Doctor/DoctorList';
 import AccountDetail from '../components/Admin/Account/AccountDetail';
 import DoctorRequest from '../components/Admin/Doctor/DoctorRequest';
+import DoctorsDetail from '../components/Admin/Doctor/DoctorDetail';
+
 const AdminRoutes = () => {
     return (
         <Routes>
@@ -37,6 +39,14 @@ const AdminRoutes = () => {
                 element={
                     <PrivateRoute roles={['admin']}>
                         <AccountDetail />
+                    </PrivateRoute>
+                } 
+            />
+            <Route 
+                path="/doctor-detail" 
+                element={
+                    <PrivateRoute roles={['admin']}>
+                      <DoctorsDetail />
                     </PrivateRoute>
                 } 
             />

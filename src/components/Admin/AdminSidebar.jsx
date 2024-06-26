@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-const AdminSidebar = () => {
+const AdminSidebar = ({ isSidebarOpen }) => {
   const [openMenu, setOpenMenu] = useState(null);
 
   const links = [
@@ -17,11 +17,13 @@ const AdminSidebar = () => {
     },
     { name: 'Account', path: '/admin-dashboard/account', submenu: [] },
   ];
+
   const handleMenuClick = (index) => {
     setOpenMenu(openMenu === index ? null : index);
   };
+
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
       <div className="sidebar_inner">
         <ul className="sidebar_navigation">
           {links.map((link, index) => (

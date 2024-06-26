@@ -114,9 +114,23 @@ h2 {
   width: 268px;
   min-width: 268px;
   min-width: 268px;
-  min-height: calc(100vh - 100px);
+  min-height: 100vh;
+  height: 100%;
+  transition: transform 0.3s ease;
+  /* transform: translateX(-100%); */
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 99;
+  padding-top: 100px;
 }
-
+.sidebar.open {
+  transform: translateX(0);
+} 
+ .dashboard_content  {
+  transition: margin-left 0.3s ease;
+  margin-left: 268px;
+}
 .sidebar .sidebar_navigation {
   list-style-type: none;
   padding: 0;
@@ -204,6 +218,8 @@ h2 {
 .striped-table th, .striped-table td {
   padding: 10px;
   text-align: left;
+  line-height: 1.5;
+  font-size: 15px;
 }
 
 a.blue {
@@ -221,11 +237,20 @@ a.remove {
 .dash_board_header {
   background-color: #38B6FF;
   padding: 10px 0px;
+  position: relative;
+  z-index: 999;
 }
 .header_row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.logo_col {
+  display: flex;
+  align-items: center;
+}
+.Dashbaord_logo {
+  margin-right: 40px;
 }
 .container-full {
   width: 100%;
@@ -398,8 +423,130 @@ input.is-invalid {
   background-color: #0000000d;
 }
 /*---- sumenu style ------*/
+/*----- toggle menu -----*/
+.toggle_button_cta {
+  background-color: transparent;
+  border: 0px;
+  box-shadow: none;
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.toggle_button_cta .bar {
+  display: none;
+}
+.toggle_button_cta i {
+  transition: all 0.3s ease-in-out;
+  transform: rotateY(0deg);
+}
+.toggle_button_cta.active i {
+  transform: rotateY(180deg);
+}
+.toggle_button_cta.active .bar.bar2 {
+  display: none;
+}
+.toggle_button_cta.active .bar {
+  margin: 0px;
+}
+.toggle_button_cta.active .bar .bar.bar1 {}
+
+.toggle_button_cta.active .bar.bar1 {
+  transform: rotate(45deg);
+  transform-origin: center 3px;
+}
+.toggle_button_cta.active .bar.bar3 {
+  transform: rotate(-45deg);
+  transform-origin: center -1px;
+}
+/*----- toggle menu end -----*/
+.detail_row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+  gap: 30px 0px;
+}
+.detail_col {
+  width: 50%;
+  padding: 0px 15px;
+}
+.detail_div, .check_date {font-size: 16px;line-height: 1.5;padding: 7px 0px;}
+.detail_div:not(:last-child), .check_date:not(:last-child) {
+  border-bottom: 1px solid #E4EAEE;
+}
+.check_date {
+  color: #788796;
+  font-weight: 400;
+}
+.check_date span {
+  font-weight: 700;
+}
+.user_name.mobile_username {
+  display: none;
+}
+
+/*---- seacrtvh component css ------*/
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tag {
+  background-color: #583375;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.remove-tag {
+  background: none;
+  border: none;
+  color: white;
+  margin-left: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.search_result_dropdown {
+  background-color: #D7F0FF;
+  padding: 20px;
+  border-radius: 6px;
+}
 
 /*------ responsive start------*/
+@media (min-Width: 1367px) {
+.toggle_button{
+display:none;
+}
+}
+
+@media (max-Width: 1440px) {
+.dash_container {
+  padding: 0px 30px;
+}
+h1 {
+  font-size: 32px;
+}
+h2 {
+  font-size: 32px;
+}
+} 
+
+@media (max-Width: 1366px) {
+
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  } 
+   .dashboard_content  {
+    margin-left: 0px;
+  }
+}
 
 @media (max-Width: 767px) {
   .form_col.W_50 {
@@ -413,6 +560,64 @@ body {
 }
 .form_control {
   font-size: 14px;
+}
+.toggle_button_cta {
+  border: 0px solid #FFFFFF;
+  padding: 5px 13px;
+  background-color: transparent;
+  width: 56px;
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.toggle_button_cta span.bar {
+  height: 2px;
+  width: 100%;
+  background-color: #fff;
+  display: block;
+  margin: 4px 0px;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+.toggle_button_cta i {
+  display: none;
+}
+.Dashbaord_logo .Dash_logo {
+  width: 100%;
+  max-width: 70px;
+}
+
+.container-full {
+  padding: 0px 15px;
+}
+
+.user_name.desktop_usename {
+  display: none;
+}
+
+.header_row .admin_info_col {
+  width: 40px;
+  min-width: 40px;
+}
+
+.logo_col {
+  width: 100%;
+  justify-content: space-between;
+  padding-right: 5px;
+}
+
+.Dashbaord_logo {
+  margin-right: 0px;
+}
+
+.user_name.mobile_username {
+  display: block;
+  color: #000000;
+  padding: 10px 20px;
+}
+
+.dropdown_menu.open {
+  max-height: 400px;
 }
 }
 
