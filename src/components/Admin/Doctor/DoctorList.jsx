@@ -2,7 +2,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 import AdminLayout from '../AdminLayout';
 import searchIcon from '../../../images/search_icon.png';
-import { getDoctors } from '../../../api/doctors';
+import { getDoctors, removeDoctorAccount } from '../../../api/doctors'; 
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import DeleteDoctorModal from './DeleteProfileModal'; // import the modal component
 
 const AdminDoctors = () => {
     const [doctors, setDoctors] = useState([]);
@@ -58,7 +61,7 @@ const AdminDoctors = () => {
         setSelectedDoctor(null);
     };
 
-    const filteredDoctors = doctors.filter(doctor =>
+    const filteredDoctors = doctors.filter(doctor => 
         doctor.first_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         doctor.last_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         doctor.email?.toLowerCase().includes(searchQuery.toLowerCase())
@@ -104,7 +107,10 @@ const AdminDoctors = () => {
                                             <td headers="Last Name">{doctor.last_name}</td>
                                             <td headers="Email Address">{doctor.email}</td>
                                             <td headers="Actions">
-                                                <a href="#view" className='blue'>View</a> | <a href="#remove" className="remove">delete</a>
+                                                <Link to={`/admin-dashboard/doctor-detail/${doctor.id}`} className='blue'>View</Link>
+                                                {' | '}
+                                                {/* <a href="#remove" onClick={() => removeDoctorAcc(doctor.id)} className="remove">Remove</a> */}
+                                                <a href="#remove" className="remove" onClick={() => handleRemoveClick(doctor)}>delete</a>
                                             </td>
                                         </tr>
                                     ))}
