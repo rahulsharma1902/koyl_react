@@ -3,10 +3,12 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import AdminLayout from '../AdminLayout';
 import searchIcon from '../../../images/search_icon.png';
 import { getDoctors } from '../../../api/doctors';
+import DeleteDoctorModal from './DeleteProfileModal'; // import the modal component
 
 const AdminDoctors = () => {
     const [doctors, setDoctors] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [selectedDoctor, setSelectedDoctor] = useState(null); // to hold the doctor to be deleted
 
     const { user } = useContext(AuthContext);
 
@@ -25,6 +27,21 @@ const AdminDoctors = () => {
 
     const handleSearch = (event) => {
         setSearchQuery(event.target.value);
+    };
+
+    const handleDelete = (doctorId) => {
+        // Implement your delete logic here, e.g., API call to delete the doctor
+        console.log('Deleting doctor with ID:', doctorId);
+        setSelectedDoctor(null);
+        setDoctors(doctors.filter(doctor => doctor.id !== doctorId));
+    };
+
+    const handleRemoveClick = (doctor) => {
+        setSelectedDoctor(doctor);
+    };
+
+    const handleCancel = () => {
+        setSelectedDoctor(null);
     };
 
     const filteredDoctors = doctors.filter(doctor => 
@@ -73,7 +90,7 @@ const AdminDoctors = () => {
                                             <td headers="Last Name">{doctor.last_name}</td>
                                             <td headers="Email Address">{doctor.email}</td>
                                             <td headers="Actions">
-                                                <a href="#view" className='blue'>View</a> | <a href="#remove" className="remove">delete</a>
+                                                <a href="#view" className='blue'>View</a> | <a href="#remove" className="remove" onClick={() => handleRemoveClick(doctor)}>delete</a>
                                             </td>
                                         </tr>
                                     ))}
@@ -83,6 +100,13 @@ const AdminDoctors = () => {
                     </div>
                 </div>
             </div>
+            {selectedDoctor && 
+                <DeleteDoctorModal 
+                    doctor={selectedDoctor} 
+                    onDelete={handleDelete} 
+                    onCancel={handleCancel} 
+                />
+            }
         </AdminLayout>
     );
 };

@@ -20,7 +20,8 @@ export const login = async (email, password) => {
             email: email,
             // user_type: email === "admin@gmail.com" ? "admin" : "doctor",
             user_type: 'admin',
-            token: "static-jwt-token"
+            token: "static-jwt-token",
+            status:'0'
         };
         return data;
 
