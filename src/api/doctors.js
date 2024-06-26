@@ -39,8 +39,25 @@ export const approveDoctorRequest = async (approveUser) => {
                 'Content-Type': 'application/json'
             }
         });
+        console.log(response);
         return response.data;
     } catch (error) {
         throw new Error(error.response?.data?.message || 'Failed to Approve Doctor');
     }
 };
+
+
+
+export const removeDoctorAccount = async (doctorRemove) => {
+    try {
+        const response = await axios.post('http://127.0.0.1:8000/api/remove-doctor',doctorRemove,{
+            headers : {
+                'Content-Type': 'application/json'
+            }
+        });
+        console.log(response);
+        return response.data;
+    } catch (error){
+        throw new Error(error.response?.data?.message || 'Failed to remove Doctor');
+    }
+}

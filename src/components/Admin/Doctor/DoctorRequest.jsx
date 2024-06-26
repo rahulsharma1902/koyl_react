@@ -2,8 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 import AdminLayout from '../AdminLayout';
 import searchIcon from '../../../images/search_icon.png';
-import { getRequestDoctors } from '../../../api/doctors';
-import {approveDoctorRequest} from '../../../api/doctors';
+import { getRequestDoctors, approveDoctorRequest ,removeDoctorAccount} from '../../../api/doctors';
 import { toast } from 'react-toastify'; 
 
 const DoctorRequest = () => {
@@ -24,17 +23,34 @@ const DoctorRequest = () => {
         fetchDoctors();
     }, []);
 
+    const removeDoctorAcc = async (id) => {
+        try {
+            if(id){
+                const response = await removeDoctorAccount({ id });
+                toast.success(response.message);
+                setRequests(prevRequests => prevRequests.filter(request => request.id !== id));
+            }else {
+                throw new Error('Invalid id provided for approval');
+            }
 
+        } catch (error){
+            toast.error(error.message);
+            console.error('Approval error:', error.message);
+        }
+    }
     const approveRequest = async (id) => {
         try {
             if (id) {
                 const response = await approveDoctorRequest({ id });
-                console.log('Approval response:', response);
-                toast.success('Operation successful!');
+                toast.success(response.message);
+                // Remove the approved request from requests state
+                setRequests(prevRequests => prevRequests.filter(request => request.id !== id));
             } else {
                 throw new Error('Invalid id provided for approval');
             }
         } catch (error) {
+            console.warn(error);
+            toast.error(error.message);
             console.error('Approval error:', error.message);
         }
     };
@@ -91,7 +107,7 @@ const DoctorRequest = () => {
                                             <td headers="Actions">
                                                 <a href="#view" className='blue'>View</a> | 
                                                 <a href="#approve" onClick={() => approveRequest(request.id)} className='green'>Approve</a> | 
-                                                <a href="#remove" onClick={()=>approveRequest()} className="remove">Remove</a>
+                                                <a href="#remove" onClick={() => removeDoctorAcc(request.id)} className="remove">Remove</a>
                                             </td>
                                         </tr>
                                     ))}

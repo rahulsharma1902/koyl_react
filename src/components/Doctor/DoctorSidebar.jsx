@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const DoctorSidebar = () =>{
     const links = [
         { name: 'Dashboard', path: '/doctor-dashboard' },
-        { name: 'Doctors', path: '/doctor-dashboard/patients' },
+        { name: 'Patients', path: '/doctor-dashboard/patients' },
         { name: 'Account', path: '/doctor-dashboard/account' },
     ];
 

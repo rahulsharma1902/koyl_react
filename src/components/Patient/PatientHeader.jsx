@@ -13,7 +13,7 @@ const PatientHeader = ({ user}) => {
                     </div>
                     <div className="admin_info_col">
                         <div className="user-info">
-                            <div class="user_name">
+                            <div className="user_name">
                                  Welcome, {user ? user.first_name : 'Guest'}
                             </div>
                             <div className="user_avtar">
