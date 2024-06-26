@@ -4,7 +4,7 @@ import AdminLayout from '../../Admin/AdminLayout';
 import searchIcon from '../../../images/search_icon.png';
 import { getPatients } from '../../../api/patients';
 import DoctorLayout from '../DoctorLayout';
-
+import {Link} from 'react-router-dom';
 const DoctorsPatient = () => {
     const [patients, setPatients] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -74,7 +74,13 @@ const DoctorsPatient = () => {
                                             <td headers="Last Name">{patient.last_name}</td>
                                             <td headers="Email Address">{patient.email}</td>
                                             <td headers="Actions">
-                                                <a href="#view" className='blue'>View</a> | <a href="#remove" className="remove">delete</a>
+                                            {/* <Link to={`/admin-dashboard/doctor-detail/${doctor.id}`} className='blue'>View</Link> */}
+
+                                                <Link to={`/doctor-dashboard/patient-detail/${patient.id}`}className='blue'>View</Link>
+                                                {/* <a href="#view" className='blue'>View</a>  */}
+                                                {'|'}
+                                                <Link to={`/doctor-dashboard/patient-remove/${patient.id}`}className='remove'>Delete</Link>
+                                                 {/* <a href="#remove" className="remove">delete</a> */}
                                             </td>
                                         </tr>
                                     ))}

@@ -32,7 +32,7 @@ const AdminHeader = ({ user, onToggleSidebar }) => {
                                 <span className="bar bar1"></span>
                                 <span className="bar bar2"></span>
                                 <span className="bar bar3"></span>
-                                <i class="fa-solid fa-chevron-right"></i>
+                                <i className="fa-solid fa-chevron-right"></i>
                             </button>
                         </div>
                     </div>
@@ -49,7 +49,7 @@ const AdminHeader = ({ user, onToggleSidebar }) => {
                                 <div className="user_name mobile_username">
                                     <span className="user_greet">Welcome, </span> {user ? user.first_name : 'Guest'}
                                 </div>
-                                <Link to="/my-account" className="dropdown_item">My Account</Link>
+                                <Link to="/admin-dashboard/account" className="dropdown_item">My Account</Link>
                                 <Link to="/logout" className="dropdown_item logout">Log out</Link>
                             </div>
                         </div>

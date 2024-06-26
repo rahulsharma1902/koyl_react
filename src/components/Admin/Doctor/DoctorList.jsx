@@ -2,7 +2,9 @@ import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 import AdminLayout from '../AdminLayout';
 import searchIcon from '../../../images/search_icon.png';
-import { getDoctors } from '../../../api/doctors';
+import { getDoctors, removeDoctorAccount } from '../../../api/doctors'; 
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 const AdminDoctors = () => {
     const [doctors, setDoctors] = useState([]);
@@ -23,11 +25,26 @@ const AdminDoctors = () => {
         fetchDoctors();
     }, []);
 
+    const removeDoctorAcc = async (id) => {
+        try {
+            if (id) {
+                const response = await removeDoctorAccount({ id });
+                toast.success(response.message);
+                setDoctors(prevDoctors => prevDoctors.filter(doctor => doctor.id !== id));
+            } else {
+                throw new Error('Invalid id provided for removal');
+            }
+        } catch (error) {
+            toast.error(error.message);
+            console.error('Removal error:', error.message);
+        }
+    };
+
     const handleSearch = (event) => {
         setSearchQuery(event.target.value);
     };
 
-    const filteredDoctors = doctors.filter(doctor => 
+    const filteredDoctors = doctors.filter(doctor =>
         doctor.first_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         doctor.last_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         doctor.email?.toLowerCase().includes(searchQuery.toLowerCase())
@@ -47,11 +64,11 @@ const AdminDoctors = () => {
                                     <div className='search_icon'>
                                         <img src={searchIcon} className='serch_icon' alt="search icon" />
                                     </div>
-                                    <input 
-                                        type="text" 
-                                        placeholder="Search by name or email" 
-                                        value={searchQuery} 
-                                        onChange={handleSearch} 
+                                    <input
+                                        type="text"
+                                        placeholder="Search by name or email"
+                                        value={searchQuery}
+                                        onChange={handleSearch}
                                     />
                                 </div>
                             </div>
@@ -73,7 +90,9 @@ const AdminDoctors = () => {
                                             <td headers="Last Name">{doctor.last_name}</td>
                                             <td headers="Email Address">{doctor.email}</td>
                                             <td headers="Actions">
-                                                <a href="#view" className='blue'>View</a> | <a href="#remove" className="remove">delete</a>
+                                                <Link to={`/admin-dashboard/doctor-detail/${doctor.id}`} className='blue'>View</Link>
+                                                {' | '}
+                                                <a href="#remove" onClick={() => removeDoctorAcc(doctor.id)} className="remove">Remove</a>
                                             </td>
                                         </tr>
                                     ))}

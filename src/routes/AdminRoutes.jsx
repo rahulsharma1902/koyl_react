@@ -43,7 +43,7 @@ const AdminRoutes = () => {
                 } 
             />
             <Route 
-                path="/doctor-detail" 
+                path="/doctor-detail/:id" 
                 element={
                     <PrivateRoute roles={['admin']}>
                       <DoctorsDetail />

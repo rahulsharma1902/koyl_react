@@ -4,6 +4,7 @@ import AdminLayout from '../AdminLayout';
 import searchIcon from '../../../images/search_icon.png';
 import { getRequestDoctors, approveDoctorRequest ,removeDoctorAccount} from '../../../api/doctors';
 import { toast } from 'react-toastify'; 
+import { Link } from 'react-router-dom'
 
 const DoctorRequest = () => {
     const { user } = useContext(AuthContext);
@@ -43,7 +44,6 @@ const DoctorRequest = () => {
             if (id) {
                 const response = await approveDoctorRequest({ id });
                 toast.success(response.message);
-                // Remove the approved request from requests state
                 setRequests(prevRequests => prevRequests.filter(request => request.id !== id));
             } else {
                 throw new Error('Invalid id provided for approval');
@@ -105,7 +105,9 @@ const DoctorRequest = () => {
                                             <td headers="Last Name">{request.last_name}</td>
                                             <td headers="Email Address">{request.email}</td>
                                             <td headers="Actions">
-                                                <a href="#view" className='blue'>View</a> | 
+                                            <Link to={`/admin-dashboard/doctor-detail/${request.id}`} className='blue'>View</Link>
+                                                {/* <a href="#view" className='blue'>View</a>  */}
+                                                | 
                                                 <a href="#approve" onClick={() => approveRequest(request.id)} className='green'>Approve</a> | 
                                                 <a href="#remove" onClick={() => removeDoctorAcc(request.id)} className="remove">Remove</a>
                                             </td>
