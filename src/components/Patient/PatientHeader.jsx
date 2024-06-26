@@ -23,9 +23,7 @@ const PatientHeader = ({ user}) => {
                     </div>
                 </div>
             </div>
-        </div>
-        
-   
+        </div>   
     )
 };
 export default PatientHeader;

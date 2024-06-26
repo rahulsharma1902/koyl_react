@@ -70,96 +70,103 @@ const CompleteProfile = ({ user }) => {
     }
 
     return (
-        <div className='container'>
-            <form onSubmit={handleSubmit} className="account-form">
-                <div className='form_row'>
-                    <div className='form_col W_50'>
-                        <div className="form_group">
-                            <label>First Name *</label>
-                            <input
-                                className={`form_control ${validationErrors.first_name && 'is-invalid'}`}
-                                type="text"
-                                name="first_name"
-                                value={formData.first_name}
-                                onChange={handleChange}
-                            />
-                            {validationErrors.first_name && <span className="invalid-feedback">{validationErrors.first_name}</span>}
-                        </div>
-                    </div>
-                    <div className='form_col W_50'>
-                        <div className="form_group">
-                            <label>Last Name *</label>
-                            <input
-                                className={`form_control ${validationErrors.last_name && 'is-invalid'}`}
-                                type="text"
-                                name="last_name"
-                                value={formData.last_name}
-                                onChange={handleChange}
-                            />
-                            {validationErrors.last_name && <span className="invalid-feedback">{validationErrors.last_name}</span>}
-                        </div>
-                    </div>
-                    <div className='form_col W_50'>
-                        <div className="form_group">
-                            <label>Age *</label>
-                            <input
-                                className={`form_control ${validationErrors.age && 'is-invalid'}`}
-                                type="number"
-                                name="age"
-                                value={formData.age}
-                                onChange={handleChange}
-                            />
-                            {validationErrors.age && <span className="invalid-feedback">{validationErrors.age}</span>}
-                        </div>
-                    </div>
-                    <div className='form_col W_50'>
-                        <div className="form_group">
-                            <label>Weight (lbs) *</label>
-                            <input
-                                className={`form_control ${validationErrors.weight && 'is-invalid'}`}
-                                type="number"
-                                name="weight"
-                                value={formData.weight}
-                                onChange={handleChange}
-                            />
-                            {validationErrors.weight && <span className="invalid-feedback">{validationErrors.weight}</span>}
-                        </div>
-                    </div>
-                    <div className='form_col W_50'>
-                        <div className="form_group">
-                            <label>Race *</label>
-                            <select
-                                className={`form_control ${validationErrors.race && 'is-invalid'}`}
-                                name="race"
-                                value={formData.race}
-                                onChange={handleChange}
-                            >
-                                <option value="">Select...</option>
-                                <option value="White">White</option>
-                                <option value="Black">Black</option>
-                                <option value="Asian">Asian</option>
-                                <option value="Hispanic">Hispanic</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            {validationErrors.race && <span className="invalid-feedback">{validationErrors.race}</span>}
-                        </div>
-                    </div>
-                    <div className='form_col W_50'>
-                        <div className="form_group">
-                            <label>Please list any known food or drug allergies</label>
-                            <input
-                                className='form_control'
-                                type="text"
-                                name="allergies"
-                                value={formData.allergies}
-                                onChange={handleChange}
-                            />
-                        </div>
-                    </div>
+        <div className='complete_profile_outer'>
+            <div className='container'>
+               <div className='complete_profile_wrap'>
+                <div className='form_header'>
+                    <h2>One Last Step...</h2>
                 </div>
-                <button type="submit" className="update-profile-btn cta cta_sky">Complete Profile</button>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-            </form>
+                <form onSubmit={handleSubmit} className="account-form">
+                        <div className='form_row'>
+                            <div className='form_col W_50'>
+                                <div className="form_group">
+                                    <label>First Name *</label>
+                                    <input
+                                        className={`form_control ${validationErrors.first_name && 'is-invalid'}`}
+                                        type="text"
+                                        name="first_name"
+                                        value={formData.first_name}
+                                        onChange={handleChange}
+                                    />
+                                    {validationErrors.first_name && <span className="invalid-feedback">{validationErrors.first_name}</span>}
+                                </div>
+                            </div>
+                            <div className='form_col W_50'>
+                                <div className="form_group">
+                                    <label>Last Name *</label>
+                                    <input
+                                        className={`form_control ${validationErrors.last_name && 'is-invalid'}`}
+                                        type="text"
+                                        name="last_name"
+                                        value={formData.last_name}
+                                        onChange={handleChange}
+                                    />
+                                    {validationErrors.last_name && <span className="invalid-feedback">{validationErrors.last_name}</span>}
+                                </div>
+                            </div>
+                            <div className='form_col W_50'>
+                                <div className="form_group">
+                                    <label>Age *</label>
+                                    <input
+                                        className={`form_control ${validationErrors.age && 'is-invalid'}`}
+                                        type="number"
+                                        name="age"
+                                        value={formData.age}
+                                        onChange={handleChange}
+                                    />
+                                    {validationErrors.age && <span className="invalid-feedback">{validationErrors.age}</span>}
+                                </div>
+                            </div>
+                            <div className='form_col W_50'>
+                                <div className="form_group">
+                                    <label>Weight (lbs) *</label>
+                                    <input
+                                        className={`form_control ${validationErrors.weight && 'is-invalid'}`}
+                                        type="number"
+                                        name="weight"
+                                        value={formData.weight}
+                                        onChange={handleChange}
+                                    />
+                                    {validationErrors.weight && <span className="invalid-feedback">{validationErrors.weight}</span>}
+                                </div>
+                            </div>
+                            <div className='form_col W_50'>
+                                <div className="form_group">
+                                    <label>Race *</label>
+                                    <select
+                                        className={`form_control ${validationErrors.race && 'is-invalid'}`}
+                                        name="race"
+                                        value={formData.race}
+                                        onChange={handleChange}
+                                    >
+                                        <option value="">Select...</option>
+                                        <option value="White">White</option>
+                                        <option value="Black">Black</option>
+                                        <option value="Asian">Asian</option>
+                                        <option value="Hispanic">Hispanic</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    {validationErrors.race && <span className="invalid-feedback">{validationErrors.race}</span>}
+                                </div>
+                            </div>
+                            <div className='form_col W_50'>
+                                <div className="form_group">
+                                    <label>Please list any known food or drug allergies</label>
+                                    <input
+                                        className='form_control'
+                                        type="text"
+                                        name="allergies"
+                                        value={formData.allergies}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" className="update-profile-btn cta cta_sky">Complete Profile</button>
+                        {error && <p style={{ color: 'red' }}>{error}</p>}
+                    </form>
+               </div>
+            </div>
         </div>
     );
 };
