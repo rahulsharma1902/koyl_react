@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { doctorDetail } from '../../../api/doctors';
+import { doctorDetail,updateDoctorProfile } from '../../../api/doctors';
 
 const AccountForm = () => {
     const [formData, setFormData] = useState({
+        id:'',
         first_name: '',
         last_name: '',
         email: '',
         location: '',
         practice: '',
         doctor_type: '',
-        allergies: '',
     });
 
     const [error, setError] = useState(null);
@@ -25,13 +25,13 @@ const AccountForm = () => {
             try {
                 const doctorData = await doctorDetail(storedUser.id);
                 setFormData({
+                    id:doctorData.id || '',
                     first_name: doctorData.first_name || '',
                     last_name: doctorData.last_name || '',
                     email: doctorData.email || '',
                     location: doctorData.doctor_meta?.location || '',
                     practice: doctorData.doctor_meta?.practice || '',
                     doctor_type: doctorData.doctor_meta?.doctor_type || '',
-                    allergies: doctorData.allergies || '',
                 });
             } catch (error) {
                 console.error('Failed to fetch Doctor details:', error);
@@ -50,9 +50,14 @@ const AccountForm = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => { 
         e.preventDefault();
-        console.log('Profile updated:', formData);
+        // console.log('Profile updated:', formData);
+        try {
+            const doctorUpdate = await updateDoctorProfile(formData);
+        } catch (error){
+            // console.log(formData);
+        }
     };
 
     return (
@@ -94,6 +99,7 @@ const AccountForm = () => {
                             value={formData.email}
                             onChange={handleChange}
                             required
+                            disabled
                         />
                     </div>
                 </div>

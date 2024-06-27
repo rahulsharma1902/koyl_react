@@ -47,7 +47,7 @@ const DoctorHeader = ({ user, onToggleSidebar }) => {
                                 <div className="user_name mobile_username">
                                     <span className="user_greet">Welcome, </span> {user ? user.first_name : 'Guest'}
                                 </div>
-                                <Link to="/my-account" className="dropdown_item">My Account</Link>
+                                <Link to="/doctor-dashboard/account" className="dropdown_item">My Account</Link>
                                 <Link to="/logout" className="dropdown_item logout">Log out</Link>
                             </div>
                         </div>

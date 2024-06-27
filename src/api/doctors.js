@@ -78,18 +78,23 @@ export const doctorDetail = async (id) => {
 }
 
 
-export const updateDoctorProfile = async (id) => {
+export const updateDoctorProfile = async (formData) => {
     try {
-        const response = await axios.post(`http://127.0.0.1:8000/api/doctor-update/${id}`, {
+        const token =  localStorage.getItem('token');
+        const response = await axios.post(`http://127.0.0.1:8000/api/update-doctor/`,formData, {
             headers: {
                 'Content-Type': 'application/json',
                 // 'Authorization': `${token}`,
             }
         });
         console.log(response);
+        toast.success(response.data.message);
+        localStorage.setItem('user', JSON.stringify(response.data.doctor));
         return response.data;
     } catch (error) {
-        console.warn(error);
+        console.log(error);
+        toast.error(error.response?.data?.message);
+        toast.error(error.response?.data?.error);
         throw new Error(error.response?.data?.message || 'Failed to find the Doctor');
     }
 }
